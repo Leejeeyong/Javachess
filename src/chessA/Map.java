@@ -9,7 +9,7 @@ public class Map {
 	pon p[]=new pon[16];
 
 	
-	public void startGame(){
+	public void startGame(int num){
 		int i,j,k=0;
 		
 		/*for(i=0;i<2;i++){
@@ -19,22 +19,36 @@ public class Map {
 			}
 		}*/
 		
-		
+		if(num==1){
 			for(i=0;i<2;i++){
 				for(j=0;j<8;j++){
 					p[k]=new pon();
 					p[k].nowx=i;
 					p[k].nowy=j;
-					map[i][j]=1;
+					map[i][j]=11;
 					k=k+1;
 				}
 			}
+		}
+		else if(num==2){
+			for(i=6;i<8;i++){
+				for(j=0;j<8;j++){
+					p[k]=new pon();
+					p[k].nowx=i;
+					p[k].nowy=j;
+					map[i][j]=21;
+					k=k+1;
+				}
+			}
+		}
 		
 	}
 	public void selectAble(){
 		for(int i=0;i<16;i++){
-			System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
-			if(i==7){System.out.println();}
+				if(map[p[i].nowx][p[i].nowy]>0){
+				System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
+				if(i==7){System.out.println();}
+			}
 		}
 	}
 	
