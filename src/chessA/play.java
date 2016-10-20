@@ -32,7 +32,7 @@ public class play{
 	public static void main(String[] args) {
 		Player p1 = new Player();
 		Player p2 = new Player();
-		int flag;
+		int toss;
 		
 		//시작을 위한 작업//
 		p1.startGame(1);
@@ -44,7 +44,7 @@ public class play{
 		/////////////
 		
 		
-		flag=0;//어느 플레이어의 턴인지 알려줄
+		toss=0;//어느 플레이어의 턴인지 알려줄
 		
 		for(;;){
 			for(int i=0;i<8;i++){
@@ -53,17 +53,19 @@ public class play{
 				}
 				System.out.println();
 			}
-			if(flag==0){
+			if(toss==0){
+				System.out.println("1의 턴");
 				p1.available();
 				syncMap(p1,3);
 				syncMap(p2,2);
-				flag=1;
+				toss=1;
 			}
-			else if(flag==1){
-				p1.available();
+			else if(toss==1){
+				System.out.println("2의 턴");
+				p2.available();
 				syncMap(p2,3);
 				syncMap(p1,2);
-				flag=0;
+				toss=0;
 			}
 		}
 		

@@ -55,6 +55,7 @@ public class Map {
 	
 	public void available(){
 		int a,b;
+		int x,y;
 
 		for(;;){
 			selectAble();
@@ -69,49 +70,98 @@ public class Map {
 			for(a=0;a<8;a++){
 				for(b=0;b<8;b++){
 					if(map[a][b]==0){
-						if(a==p[t].nowx+p[t].x && b==p[t].nowy){
-							System.out.print("("+a+","+b+")");
+						if(map[p[t].nowx][p[t].nowy]/10==1){
+							if(a==p[t].nowx+p[t].x && b==p[t].nowy){
+								System.out.print("("+a+","+b+")");
+							}
 						}
-						else if(a==p[t].nowx-p[t].x && b==p[t].nowy){
-							System.out.print("("+a+","+b+")");
-						}
-						else if(a==p[t].nowx && b==p[t].nowy+p[t].y){
-							System.out.print("("+a+","+b+")");
-						}
-						else if(a==p[t].nowx && b==p[t].nowy-p[t].y){
-							System.out.print("("+a+","+b+")");
-						}
+						else if(map[p[t].nowx][p[t].nowy]/10==2){
+								if(a==p[t].nowx-p[t].x && b==p[t].nowy){
+									System.out.print("("+a+","+b+")");
+								}
+							}
+				//		else if(a==p[t].nowx-p[t].x && b==p[t].nowy){
+				//			System.out.print("("+a+","+b+")");
+				//		}
+				//		else if(a==p[t].nowx && b==p[t].nowy+p[t].y){
+				//			System.out.print("("+a+","+b+")");
+				//		}
+				//		else if(a==p[t].nowx && b==p[t].nowy-p[t].y){
+				//			System.out.print("("+a+","+b+")");
+				//		}
 					}
 				}
 			}
-			System.out.println("/ Move - 1 / back - other Num /");
+			
+			for(a=0;a<8;a++){
+				for(b=0;b<8;b++){
+					if(map[p[t].nowx][p[t].nowy]/10==1){
+						if(map[a][b]/10==2){
+							if(a==p[t].nowx+p[t].a && b==p[t].nowy+p[t].b){
+								System.out.print("("+a+","+b+")");
+							}
+							else if(a==p[t].nowx+p[t].a && b==p[t].nowy-p[t].b){
+								System.out.print("("+a+","+b+")");
+							}
+						}
+					}
+						else if(map[p[t].nowx][p[t].nowy]/10==2){
+							 if(map[a][b]/10==1){
+								if(a==p[t].nowx-p[t].a && b==p[t].nowy+p[t].b){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].a && b==p[t].nowy-p[t].b){
+									System.out.print("("+a+","+b+")");
+								}
+							 }
+					}
+				//		else if(a==p[t].nowx && b==p[t].nowy+p[t].y){
+				//			System.out.print("("+a+","+b+")");
+				//		}
+				//		else if(a==p[t].nowx && b==p[t].nowy-p[t].y){
+				//			System.out.print("("+a+","+b+")");
+				//		}
+					}
+				}
+			
+			
+			
+			
+			System.out.println("/ Move - 1 /back - other Num /");
 			q=s.nextInt();
-			map[p[t].nowx][p[t].nowy]=0;
+			
 			if(q==1){
+				System.out.println("Insert coordinate  X : ");
+				x=s.nextInt();
 				
-				movePiece(t);
+				System.out.println("Insert coordinate Y : ");
+				y=s.nextInt();
+				
+				
+					movePiece(t,x,y);
+					
+					break;
+			}
+			else if(q==2){
+				
 				break;
 			}
 		}
 	}
 	
-	public void movePiece(int t){
+	public void movePiece(int t,int x, int y){
 		Scanner s = new Scanner(System.in);
 		
 		int a,b;
-		int x,y;
+
 		
 
-			System.out.println("Insert coordinate  X : ");
-			x=s.nextInt();
+		a=map[p[t].nowx][p[t].nowy];
+		map[p[t].nowx][p[t].nowy]=0;
 			
-			System.out.println("Insert coordinate Y : ");
-			y=s.nextInt();
-
-		
 		p[t].nowx=x;
 		p[t].nowy=y;
-		map[x][y]=1;
+		map[x][y]=a;
 		
 		
 		
