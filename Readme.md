@@ -1,12 +1,14 @@
 # Chess Game class info
 
 ##play.java
-	main, play game
+	main, play game  
 ##Player.java
 	Player's name
-	extends Map
+	extends Map  
 ##Map.java
-	Most Function for play
+	Most Function for play  
 ##piece.java
 	piece's now location
-	extends pon, knight, king.......
+	extends pon, knight, king.......  
+##piece's(pon, knight.....).java
+	It is possible to move data  
