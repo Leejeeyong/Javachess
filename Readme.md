@@ -12,3 +12,5 @@
 	extends pon, knight, king.......  
 ##piece's(pon, knight.....).java
 	It is possible to move data  
+	It is possible to catch data
+
