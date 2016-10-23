@@ -19,7 +19,7 @@ public class Map {
 			}
 		}*/
 		
-		if(num==1){
+		if(num==1){//플레이어1을 위한 생성
 			for(i=0;i<2;i++){
 				for(j=0;j<8;j++){
 					p[k]=new pon();
@@ -30,7 +30,7 @@ public class Map {
 				}
 			}
 		}
-		else if(num==2){
+		else if(num==2){//플레이어2를 위한 생성
 			for(i=6;i<8;i++){
 				for(j=0;j<8;j++){
 					p[k]=new pon();
@@ -43,22 +43,30 @@ public class Map {
 		}
 		
 	}
-	public void selectAble(){
-		for(int i=0;i<16;i++){
-				if(map[p[i].nowx][p[i].nowy]>0){
-				System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
+	public void selectAble(int toss){
+		
+			for(int i=0;i<16;i++){
+				if(toss==0){
+						if(map[p[i].nowx][p[i].nowy]/10==1){
+						System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
+						}
+				}
+				else if(toss==1){
+					if(map[p[i].nowx][p[i].nowy]/10==2){
+					System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
+					}
+				}
 				if(i==7){System.out.println();}
 			}
-		}
 	}
 	
 	
-	public void available(){
+	public void available(int toss){
 		int a,b;
 		int x,y;
 
 		for(;;){
-			selectAble();
+			selectAble(toss);
 			Scanner s = new Scanner(System.in);
 			System.out.println("Select num");
 		
@@ -69,13 +77,13 @@ public class Map {
 			System.out.print("Available place :");
 			for(a=0;a<8;a++){
 				for(b=0;b<8;b++){
-					if(map[a][b]==0){
-						if(map[p[t].nowx][p[t].nowy]/10==1){
+					if(map[a][b]==0){//빈자리로 이동을 위한 조건 
+						if(map[p[t].nowx][p[t].nowy]/10==1){//플레이어1의 이동조건 
 							if(a==p[t].nowx+p[t].x && b==p[t].nowy){
 								System.out.print("("+a+","+b+")");
 							}
 						}
-						else if(map[p[t].nowx][p[t].nowy]/10==2){
+						else if(map[p[t].nowx][p[t].nowy]/10==2){//플레이어2의 이동조건 
 								if(a==p[t].nowx-p[t].x && b==p[t].nowy){
 									System.out.print("("+a+","+b+")");
 								}
@@ -95,8 +103,8 @@ public class Map {
 			
 			for(a=0;a<8;a++){
 				for(b=0;b<8;b++){
-					if(map[p[t].nowx][p[t].nowy]/10==1){
-						if(map[a][b]/10==2){
+					if(map[p[t].nowx][p[t].nowy]/10==1){//상대방 말의 위치를 잡아줌
+						if(map[a][b]/10==2){//플레이어1이 플레이어2를 잡을수 있는 위치를 잡음 
 							if(a==p[t].nowx+p[t].a && b==p[t].nowy+p[t].b){
 								System.out.print("("+a+","+b+")");
 							}
@@ -105,7 +113,7 @@ public class Map {
 							}
 						}
 					}
-						else if(map[p[t].nowx][p[t].nowy]/10==2){
+						else if(map[p[t].nowx][p[t].nowy]/10==2){//플레이어2가 플레이어1를 잡을수 있는 위치를 잡음 
 							 if(map[a][b]/10==1){
 								if(a==p[t].nowx-p[t].a && b==p[t].nowy+p[t].b){
 									System.out.print("("+a+","+b+")");
@@ -164,6 +172,10 @@ public class Map {
 		map[x][y]=a;
 		
 		
+		
+	}
+	
+	public void catchPiece(){
 		
 	}
 }
