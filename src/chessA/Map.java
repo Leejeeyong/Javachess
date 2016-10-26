@@ -6,7 +6,7 @@ public class Map {
 	
 	int map[][]=new int[8][8];
 	int avail[][]=new int[8][8];
-	pon p[]=new pon[16];
+	piece p[]=new piece[16];
 
 	
 	public void startGame(int num){
@@ -22,10 +22,16 @@ public class Map {
 		if(num==1){//플레이어1을 위한 생성
 			for(i=0;i<2;i++){
 				for(j=0;j<8;j++){
-					p[k]=new pon();
+					if(i==0 && (j==0 || j==7)){
+						p[k]=new knight();
+						map[i][j]=12;
+					}
+					else{
+						p[k]=new pon();
+						map[i][j]=11;
+					}
 					p[k].nowx=i;
 					p[k].nowy=j;
-					map[i][j]=11;
 					k=k+1;
 				}
 			}
@@ -33,10 +39,16 @@ public class Map {
 		else if(num==2){//플레이어2를 위한 생성
 			for(i=6;i<8;i++){
 				for(j=0;j<8;j++){
-					p[k]=new pon();
+					if(i==7 && (j==0 || j==7)){
+						p[k]=new knight();
+						map[i][j]=22;
+					}
+					else{
+						p[k]=new pon();
+						map[i][j]=21;
+					}
 					p[k].nowx=i;
 					p[k].nowy=j;
-					map[i][j]=21;
 					k=k+1;
 				}
 			}
@@ -46,17 +58,17 @@ public class Map {
 	public void selectAble(int toss){
 		
 			for(int i=0;i<16;i++){
-				if(toss==0){
+					if(toss==0){
 						if(map[p[i].nowx][p[i].nowy]/10==1){
-						System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
+							System.out.println("num: "+i+"("+p[i].nowx+","+p[i].nowy+")"+p[i].x2);
 						}
-				}
-				else if(toss==1){
-					if(map[p[i].nowx][p[i].nowy]/10==2){
-					System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")");
 					}
-				}
-				if(i==7){System.out.println();}
+					else if(toss==1){
+						if(map[p[i].nowx][p[i].nowy]/10==2){
+						System.out.print("num: "+i+"("+p[i].nowx+","+p[i].nowy+")"+p[i].x2);
+						}
+					}
+					if(i==7){System.out.println();}
 			}
 	}
 	
@@ -77,60 +89,79 @@ public class Map {
 			System.out.print("Available place :");
 			for(a=0;a<8;a++){
 				for(b=0;b<8;b++){
-					if(map[a][b]==0){//빈자리로 이동을 위한 조건 
-						if(map[p[t].nowx][p[t].nowy]/10==1){//플레이어1의 이동조건 
-							if(a==p[t].nowx+p[t].x && b==p[t].nowy){
-								System.out.print("("+a+","+b+")");
-							}
-						}
-						else if(map[p[t].nowx][p[t].nowy]/10==2){//플레이어2의 이동조건 
-								if(a==p[t].nowx-p[t].x && b==p[t].nowy){
+					if(toss==0){
+						if(map[a][b]==0 || map[a][b]/10==2){//빈자리로 이동을 위한 조건 
+							if(map[p[t].nowx][p[t].nowy]%10==1){
+								if(a==p[t].nowx+p[t].x1 && b==p[t].nowy){
 									System.out.print("("+a+","+b+")");
 								}
 							}
-				//		else if(a==p[t].nowx-p[t].x && b==p[t].nowy){
-				//			System.out.print("("+a+","+b+")");
-				//		}
-				//		else if(a==p[t].nowx && b==p[t].nowy+p[t].y){
-				//			System.out.print("("+a+","+b+")");
-				//		}
-				//		else if(a==p[t].nowx && b==p[t].nowy-p[t].y){
-				//			System.out.print("("+a+","+b+")");
-				//		}
+							else if(map[p[t].nowx][p[t].nowy]%10==2){
+								if(a==p[t].nowx+p[t].x1 && b==p[t].nowy+p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x1 && b==p[t].nowy-p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x1 && b==p[t].nowy+p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x1 && b==p[t].nowy-p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x2 && b==p[t].nowy+p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x2 && b==p[t].nowy-p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x2 && b==p[t].nowy+p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x2 && b==p[t].nowy-p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+							}
+						}
+					}
+					else if(toss==1){
+						if(map[a][b]==0 || map[a][b]/10==2){
+							if(map[p[t].nowx][p[t].nowy]%10==1){
+								if(a==p[t].nowx-p[t].x1 && b==p[t].nowy-p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+							}
+							else if(map[p[t].nowx][p[t].nowy]%10==2){
+								if(a==p[t].nowx+p[t].x1 && b==p[t].nowy+p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x1 && b==p[t].nowy-p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x1 && b==p[t].nowy+p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x1 && b==p[t].nowy-p[t].y1){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x2 && b==p[t].nowy+p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx+p[t].x2 && b==p[t].nowy-p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x2 && b==p[t].nowy+p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+								else if(a==p[t].nowx-p[t].x2 && b==p[t].nowy-p[t].y2){
+									System.out.print("("+a+","+b+")");
+								}
+							}
+						}
 					}
 				}
 			}
-			
-			for(a=0;a<8;a++){
-				for(b=0;b<8;b++){
-					if(map[p[t].nowx][p[t].nowy]/10==1){//상대방 말의 위치를 잡아줌
-						if(map[a][b]/10==2){//플레이어1이 플레이어2를 잡을수 있는 위치를 잡음 
-							if(a==p[t].nowx+p[t].a && b==p[t].nowy+p[t].b){
-								System.out.print("("+a+","+b+")");
-							}
-							else if(a==p[t].nowx+p[t].a && b==p[t].nowy-p[t].b){
-								System.out.print("("+a+","+b+")");
-							}
-						}
-					}
-						else if(map[p[t].nowx][p[t].nowy]/10==2){//플레이어2가 플레이어1를 잡을수 있는 위치를 잡음 
-							 if(map[a][b]/10==1){
-								if(a==p[t].nowx-p[t].a && b==p[t].nowy+p[t].b){
-									System.out.print("("+a+","+b+")");
-								}
-								else if(a==p[t].nowx-p[t].a && b==p[t].nowy-p[t].b){
-									System.out.print("("+a+","+b+")");
-								}
-							 }
-					}
-				//		else if(a==p[t].nowx && b==p[t].nowy+p[t].y){
-				//			System.out.print("("+a+","+b+")");
-				//		}
-				//		else if(a==p[t].nowx && b==p[t].nowy-p[t].y){
-				//			System.out.print("("+a+","+b+")");
-				//		}
-					}
-				}
+		
 			
 			
 			
