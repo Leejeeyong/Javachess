@@ -22,11 +22,15 @@ public class Map {
 		if(num==1){//플레이어1을 위한 생성
 			for(i=0;i<2;i++){
 				for(j=0;j<8;j++){
-					if(i==0 && (j==0 || j==7)){
+					if(i==0 && (j==1 || j==6)){//나이트 생성
 						p[k]=new knight();
+						map[i][j]=13;
+					}
+					else if(i==0 && (j==0 || j==7)){ //룩생성
+						p[k]=new rook();
 						map[i][j]=12;
 					}
-					else{
+					else{						//폰생성
 						p[k]=new pon();
 						map[i][j]=11;
 					}
@@ -39,11 +43,11 @@ public class Map {
 		else if(num==2){//플레이어2를 위한 생성
 			for(i=6;i<8;i++){
 				for(j=0;j<8;j++){
-					if(i==7 && (j==0 || j==7)){
+					if(i==7 && (j==1 || j==6)){//나이트생성
 						p[k]=new knight();
 						map[i][j]=22;
 					}
-					else{
+					else{//폰생성
 						p[k]=new pon();
 						map[i][j]=21;
 					}
@@ -83,6 +87,7 @@ public class Map {
 			System.out.println("Select num");
 		
 			int t,q;
+			int go=0,back=0,ri=0,le=0;
 		
 			t=s.nextInt();
 		
@@ -91,12 +96,13 @@ public class Map {
 				for(b=0;b<8;b++){
 					if(toss==0){
 						if(map[a][b]==0 || map[a][b]/10==2){//빈자리로 이동을 위한 조건 
-							if(map[p[t].nowx][p[t].nowy]%10==1){
+							if(map[p[t].nowx][p[t].nowy]%10==1){//폰을 위한 이동조건
 								if(a==p[t].nowx+p[t].x1 && b==p[t].nowy){
 									System.out.print("("+a+","+b+")");
 								}
 							}
-							else if(map[p[t].nowx][p[t].nowy]%10==2){
+							//
+							else if(map[p[t].nowx][p[t].nowy]%10==3){//나이트을 위한 이동조건
 								if(a==p[t].nowx+p[t].x1 && b==p[t].nowy+p[t].y1){
 									System.out.print("("+a+","+b+")");
 								}
@@ -122,7 +128,50 @@ public class Map {
 									System.out.print("("+a+","+b+")");
 								}
 							}
-						}
+							//
+							else if(map[p[t].nowx][p[t].nowy]%10==2){//룩을 위한 이동조건
+								for(;;){
+									int z=1;
+									//
+									if(go==0){
+										if(a==p[t].nowx+(p[t].x1*z) && b==p[t].nowy){
+											if(map[a][b]/10==2){
+												System.out.print("("+a+","+b+")");
+												go=1;
+											}
+											if(map[a+1][b]/10==1){
+												System.out.print("("+a+","+b+")");
+												go=1;
+											}
+										}
+									}
+									//
+									if(back==0){
+										if(a==p[t].nowx-(p[t].x1*z) && b==p[t].nowy){
+											if(map[a][b]/10==2){
+												System.out.print("("+a+","+b+")");
+												back=1;
+											}
+											if(map[a+1][b]/10==1){
+												System.out.print("("+a+","+b+")");
+												back=1;
+											}
+										}
+									}
+									//
+									if(ri==0){
+										
+									}
+									//
+									if(le==0){
+										
+									}
+									//
+									z=z+1;
+									if(z==8){break;}
+								}
+							
+							}
 					}
 					else if(toss==1){
 						if(map[a][b]==0 || map[a][b]/10==2){
@@ -185,6 +234,7 @@ public class Map {
 				
 				break;
 			}
+		}
 		}
 	}
 	

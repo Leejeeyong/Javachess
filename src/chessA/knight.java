@@ -7,5 +7,6 @@ public class knight extends piece{
 		y1=2;
 		x2=2;
 		y2=1;
+		name="Knight";
 	}
 }
